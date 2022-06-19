@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
-class NewActivity : AppCompatActivity(), View.OnClickListener {
+class NewActivity : AppCompatActivity(){
 
 
     lateinit var etMobileNumber: EditText
