@@ -9,13 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 class NewActivity : AppCompatActivity(), View.OnClickListener {
-    override fun onClick(p0: View?) {
-        Toast.makeText(
-            this@NewActivity,
-            "we clicked on the button to see this Toast",
-            Toast.LENGTH_LONG
-        ).show()
-    }
+
 
     lateinit var etMobileNumber: EditText
     lateinit var etPassword: EditText
@@ -35,7 +29,13 @@ class NewActivity : AppCompatActivity(), View.OnClickListener {
         txtRegister = findViewById(R.id.txtRegister)
         btnLogin = findViewById(R.id.btnLogin)
 
-        btnLogin.setOnClickListener(this)
+        btnLogin.setOnClickListener {
+            Toast.makeText(
+                this@NewActivity,
+                "We clicked on this button to see the Toast!",
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
     }
 
