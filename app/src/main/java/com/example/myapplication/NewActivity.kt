@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,8 @@ class NewActivity : AppCompatActivity(){
     lateinit var btnLogin: Button
     lateinit var txtForgotPassword: TextView
     lateinit var txtRegister: TextView
+    val validMobilNumber="9621659530"
+    val validPassword="mahadev"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,13 +32,33 @@ class NewActivity : AppCompatActivity(){
         txtRegister = findViewById(R.id.txtRegister)
         btnLogin = findViewById(R.id.btnLogin)
 
+
+
         btnLogin.setOnClickListener {
-            Toast.makeText(
-                this@NewActivity,
-                "We clicked on this button to see the Toast!",
-                Toast.LENGTH_LONG
-            ).show()
+            val mobileNuber = etMobileNumber.text.toString()
+            val password=etPassword.text.toString()
+
+
+            if ((mobileNuber==validMobilNumber) && (password==validPassword)){
+                val intent =Intent(this@NewActivity,MainActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(
+                    this@NewActivity,
+                    "login successful",
+                    Toast.LENGTH_LONG
+                ).show()
+            }else{
+                Toast.makeText(
+                    this@NewActivity,
+                    "Invalid Credential",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+
         }
+
+
 
     }
 
