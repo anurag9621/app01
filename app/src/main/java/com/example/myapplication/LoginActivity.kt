@@ -3,13 +3,12 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
-class NewActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity() {
 
 
     lateinit var etMobileNumber: EditText
@@ -17,13 +16,13 @@ class NewActivity : AppCompatActivity(){
     lateinit var btnLogin: Button
     lateinit var txtForgotPassword: TextView
     lateinit var txtRegister: TextView
-    val validMobilNumber="9621659530"
-    val validPassword="mahadev"
+    val validMobilNumber = "9621659530"
+    val validPassword = arrayOf("tony", "stave", "bruce", "thanos")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new)
+        setContentView(R.layout.activity_login)
         title = "Log In"
 
         etMobileNumber = findViewById(R.id.etMobileNumber)
@@ -36,20 +35,20 @@ class NewActivity : AppCompatActivity(){
 
         btnLogin.setOnClickListener {
             val mobileNuber = etMobileNumber.text.toString()
-            val password=etPassword.text.toString()
+            val password = etPassword.text.toString()
 
 
-            if ((mobileNuber==validMobilNumber) && (password==validPassword)){
-                val intent =Intent(this@NewActivity,MainActivity::class.java)
+            if ((mobileNuber == validMobilNumber) && (validPassword.contains(password))) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
                 Toast.makeText(
-                    this@NewActivity,
+                    this@LoginActivity,
                     "login successful",
                     Toast.LENGTH_LONG
                 ).show()
-            }else{
+            } else {
                 Toast.makeText(
-                    this@NewActivity,
+                    this@LoginActivity,
                     "Invalid Credential",
                     Toast.LENGTH_LONG
                 ).show()
@@ -59,7 +58,11 @@ class NewActivity : AppCompatActivity(){
         }
 
 
+    }
 
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 
 
