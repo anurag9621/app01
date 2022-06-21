@@ -1,6 +1,8 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,11 +20,22 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtRegister: TextView
     val validMobilNumber = "9621659530"
     val validPassword = arrayOf("tony", "stave", "bruce", "thanos")
-
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        sharedPreferences =
+            getSharedPreferences(getString(R.string.preference_file_name), Context.MODE_PRIVATE)
+
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if (isLoggedIn) {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            setContentView(R.layout.activity_login)
+        }
+
         title = "Log In"
 
         etMobileNumber = findViewById(R.id.etMobileNumber)
@@ -46,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     "login successful",
                     Toast.LENGTH_LONG
                 ).show()
+                savePreferences()
             } else {
                 Toast.makeText(
                     this@LoginActivity,
@@ -61,5 +75,12 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    fun savePreferences() {
+        sharedPreferences.edit().putBoolean("isLoggedIn", true).apply()
+    }
 
 }
+
+
+
+
