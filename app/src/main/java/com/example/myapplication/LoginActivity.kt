@@ -36,6 +36,10 @@ class LoginActivity : AppCompatActivity() {
             setContentView(R.layout.activity_login)
         }
 
+
+
+
+
         title = "Log In"
 
         etMobileNumber = findViewById(R.id.etMobileNumber)
