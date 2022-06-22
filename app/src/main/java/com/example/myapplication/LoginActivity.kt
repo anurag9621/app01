@@ -28,18 +28,13 @@ class LoginActivity : AppCompatActivity() {
             getSharedPreferences(getString(R.string.preference_file_name), Context.MODE_PRIVATE)
 
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        setContentView(R.layout.activity_login)
 
         if (isLoggedIn) {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
-        } else {
-            setContentView(R.layout.activity_login)
+            finish()
         }
-
-
-
-
-
         title = "Log In"
 
         etMobileNumber = findViewById(R.id.etMobileNumber)
@@ -51,11 +46,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
-            val mobileNuber = etMobileNumber.text.toString()
+            val mobileNumber = etMobileNumber.text.toString()
             val password = etPassword.text.toString()
 
 
-            if ((mobileNuber == validMobilNumber) && (validPassword.contains(password))) {
+            if ((mobileNumber == validMobilNumber) && (validPassword.contains(password))) {
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
                 Toast.makeText(
